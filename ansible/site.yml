@@ -1,0 +1,56 @@
+- name: Setup Docker + Telegraf Monitoring Stack
+  hosts: monitoring
+  become: yes
+  vars_files:
+    - ../vars/monitoring.yml
+
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Install Docker Compose
+      get_url:
+        url: "{{ docker_compose_url }}"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+    - name: Symlink Docker Compose
+      file:
+        src: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
+        state: link
+
+    - name: Create persistence directories for InfluxDB & Grafana
+      file:
+        path: "/home/ubuntu/{{ item }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+      loop:
+        - influxdb
+        - grafana
+
+    - name: Create docker-compose.yml
+      copy:
+        src: ../docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: Copy Telegraf config
+      copy:
+        src: ../telegraf/
+        dest: /home/ubuntu/telegraf/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: Run Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: /home/ubuntu
