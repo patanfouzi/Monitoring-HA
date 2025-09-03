@@ -124,7 +124,11 @@ sudo apt -y install telegraf
 Configure `/etc/telegraf/telegraf.conf`:
 
 * System metrics (`cpu`, `mem`, `disk`, `net`, `system`).
+  
 * Django app metrics via Prometheus:
+```toml
+  [inputs.procstat]
+```toml
 
   ```toml
   [[inputs.prometheus]]
@@ -136,6 +140,8 @@ Configure `/etc/telegraf/telegraf.conf`:
   ```toml
   [[inputs.mysql]]
   servers = ["user:password@tcp(127.0.0.1:3306)/"]
+  # Replace root:password with your MySQL username and password
+  # If your MySQL is running on another VM, replace 127.0.0.1 with its IP
   ```
 
 Point output to InfluxDB:
@@ -144,8 +150,8 @@ Point output to InfluxDB:
 [[outputs.influxdb_v2]]
   urls = ["http://<monitor-ip>:8086"]
   token = "<your-admin-token>"
-  organization = "admin"
-  bucket = "telegraf"
+  organization = "<org-name>"
+  bucket = "<bucket-name>"
 ```
 
 Enable & start Telegraf:
