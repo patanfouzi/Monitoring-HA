@@ -16,6 +16,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: "472:472"   # 👈 ensures Grafana runs with correct permissions
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
@@ -27,7 +28,6 @@ services:
       - .env
     networks:
       - monitoring
-
 
 networks:
   monitoring:
