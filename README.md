@@ -83,7 +83,7 @@ GRAFANA_PORT=<port-number>   #3000
 Run playbook (`site.yml`):
 
 ```bash
-ansible-playbook -i hosts site.yml
+ansible-playbook -i inventory.ini site.yml
 ```
 
 This will:
