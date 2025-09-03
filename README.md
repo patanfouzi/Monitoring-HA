@@ -217,8 +217,8 @@ Metrics exposed at:
 1. **Django App** → `http://<django-app-ip>:7000`
 2. **Grafana UI** → `http://<monitor-ip>:3000`
 
-   * Login with admin/admin.
-   * Add InfluxDB data source (bucket: `telegraf`).
+   * Login with username and password.
+   * Add InfluxDB data source (bucket: `<bucket-name>`).
 3. **InfluxDB UI** → `http://<monitor-ip>:8086`
 
    * Login with admin credentials.
