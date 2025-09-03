@@ -167,6 +167,9 @@ sudo systemctl start telegraf
 Install dependencies:
 
 ```bash
+sudo apt install python3-pip
+python3 -m venv venv
+source venv/bin/activate
 pip install django-prometheus requests
 ```
 
