@@ -63,17 +63,17 @@ Edit `.env` file for InfluxDB & Grafana:
 ```ini
 # InfluxDB
 DOCKER_INFLUXDB_INIT_MODE=setup
-DOCKER_INFLUXDB_INIT_USERNAME=admin
-DOCKER_INFLUXDB_INIT_PASSWORD=admin123
-DOCKER_INFLUXDB_INIT_ORG=admin
-DOCKER_INFLUXDB_INIT_BUCKET=admin
+DOCKER_INFLUXDB_INIT_USERNAME=<username>
+DOCKER_INFLUXDB_INIT_PASSWORD=<password>
+DOCKER_INFLUXDB_INIT_ORG=<org-name>
+DOCKER_INFLUXDB_INIT_BUCKET=<bucket-name>
 DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=<your-admin-token>
-INFLUXDB_PORT=8086
+INFLUXDB_PORT=<port-number>   #8086
 
 # Grafana
-GF_SECURITY_ADMIN_USER=admin
-GF_SECURITY_ADMIN_PASSWORD=admin
-GRAFANA_PORT=3000
+GF_SECURITY_ADMIN_USER=<username>
+GF_SECURITY_ADMIN_PASSWORD=<password>
+GRAFANA_PORT=<port-number>   #3000
 ```
 
 ---
@@ -96,10 +96,23 @@ Check services:
 
 * Grafana → `http://<monitor-ip>:3000`
 * InfluxDB → `http://<monitor-ip>:8086`
+---
+
+If any container is exited, check logs:
+
+```bash
+sudo docker logs <container>
+```
+
+Manage Containers (Optional)
+```bash
+docker-compose down -v   # Stops & removes containers, networks, and volumes (data loss if not mapped)
+docker-compose up -d     # Starts containers in background
+```
 
 ---
 
-### 4️⃣ Install Telegraf (on monitored node)
+### 4️⃣ Install Telegraf (where our app is present/running)
 
 ```bash
 curl -s https://repos.influxdata.com/influxdata-archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/influxdata.gpg
