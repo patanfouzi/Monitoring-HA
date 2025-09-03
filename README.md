@@ -210,3 +210,10 @@ Metrics exposed at:
 * Update MySQL credentials in `telegraf.conf`.
 * Replace `<monitor-ip>` and `<django-app-ip>` with actual VM IPs.
 * Use dashboards in Grafana to visualize metrics (CPU, RAM, MySQL, Django).
+
+---
+Copy the [telegraf.conf](./telegraf.conf) to /etc/telegraf/telegraf.conf
+make sure to update:
+1. MYSQL credentials
+2. Grafana credentials
+3. Monitoring server IP(influxdb URL)
