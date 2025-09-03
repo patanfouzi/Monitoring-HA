@@ -34,6 +34,14 @@
         - influxdb
         - grafana
 
+    - name: Fix Grafana directory permissions for container (UID 472)
+      file:
+        path: "/home/ubuntu/grafana"
+        state: directory
+        owner: "472"
+        group: "472"
+        recurse: yes
+
     - name: Create docker-compose.yml
       copy:
         src: ../docker-compose.yml
@@ -41,6 +49,7 @@
         owner: ubuntu
         group: ubuntu
         mode: '0644'
+
     - name: Copy .env file
       copy:
         src: ../.env
@@ -48,6 +57,7 @@
         owner: ubuntu
         group: ubuntu
         mode: '0644'
+
     - name: Run Docker Compose
       command: docker-compose up -d
       args:
