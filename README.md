@@ -138,7 +138,7 @@ Configure `/etc/telegraf/telegraf.conf`:
 
   ```toml
   [[inputs.mysql]]
-  servers = ["user:password@tcp(127.0.0.1:3306)/"]
+  servers = ["root:password@tcp(127.0.0.1:3306)/"]
   # Replace root:password with your MySQL username and password
   # If your MySQL is running on another VM, replace 127.0.0.1 with its IP
   ```
