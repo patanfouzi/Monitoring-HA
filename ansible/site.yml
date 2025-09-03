@@ -1,4 +1,4 @@
-- name: Setup Docker + Telegraf Monitoring Stack
+- name: Setup Docker + Monitoring Stack
   hosts: monitoring
   become: yes
   vars_files:
@@ -41,15 +41,13 @@
         owner: ubuntu
         group: ubuntu
         mode: '0644'
-
-    - name: Copy Telegraf config
+    - name: Copy .env file
       copy:
-        src: ../telegraf/
-        dest: /home/ubuntu/telegraf/
+        src: ../.env
+        dest: /home/ubuntu/.env
         owner: ubuntu
         group: ubuntu
         mode: '0644'
-
     - name: Run Docker Compose
       command: docker-compose up -d
       args:
