@@ -126,7 +126,6 @@ Configure `/etc/telegraf/telegraf.conf`:
 * System metrics (`cpu`, `mem`, `disk`, `net`, `system`).
   
 * Django app metrics via Prometheus:
-```toml
   [inputs.procstat]
 
 
